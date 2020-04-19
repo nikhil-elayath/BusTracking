@@ -1,0 +1,7 @@
+{
+  "postgresURL": "",
+  "jwtPrivateKey": "",
+  "mailPass": "",
+  "mailId": "",
+  "decryptKey": ""
+}

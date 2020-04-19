@@ -1,0 +1,7 @@
+{
+  "postgresURL": "busTrackingPostgresURL",
+  "jwtPrivateKey": "busTrackingPrivateKey",
+  "mailPass": "busTrackingMailPass",
+  "mailId": "busTrackingMailId",
+  "decryptKey": "busTrackingDecryptKey"
+}

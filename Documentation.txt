@@ -1,0 +1,4 @@
+installed react-native
+installed the dependencies
+changed the folder structure
+created src moved app.js into it
