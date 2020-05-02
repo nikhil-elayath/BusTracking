@@ -5,7 +5,6 @@ import {checkEmail} from '../../actions/Login'
 
 export class EmailScreenContainer extends Component {
   render () {
-    console.log('sd', this.props)
     return <EmailScreen {...this.props} />
   }
 }
