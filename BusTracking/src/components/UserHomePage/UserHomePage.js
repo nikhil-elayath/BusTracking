@@ -35,7 +35,9 @@ export default class UserHomePage extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text> Drivers location </Text>
+        <View>
+          <Text> User location </Text>
+        </View>
 
         <Mapview
           testID='map'
@@ -60,19 +62,23 @@ export default class UserHomePage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    // justifyContent: 'flex-end',
+    // alignItems: 'center',
   },
+  // map: {
+
+  //   // position: 'absolute',
+  //   // top: 0,
+  //   // left: 0,
+  //   // right: 0,
+  //   // bottom: 0,
+  // },
   map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    height: Dimensions.get('window').height * 0.45,
   },
 })

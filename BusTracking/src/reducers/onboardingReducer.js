@@ -1,6 +1,6 @@
 import {CHECK_MAIL} from '../actions/Types'
 const initialState = {
-  emailVerifiedStatus: '',
+  userType: '',
 }
 
 export default function (state = initialState, action) {
@@ -8,7 +8,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case CHECK_MAIL:
       //returning the state and putting the data that is recieved from the api in to the emailVerified
-      return {...state, emailVerifiedStatus: action.payload.status}
+      console.log(action.payload.userType)
+      return {...state, userType: action.payload.userType}
     default:
       return state
   }

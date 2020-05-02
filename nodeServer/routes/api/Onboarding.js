@@ -24,15 +24,16 @@ router.post('/login', async (req, res, next) => {
       if (emailFromDriverTable.length != 0) {
         res.status(200).json({
           status: 200,
-          message: 'Driver email recieved',
-          isUser: false
+          userType: 'driver',
+          message: 'Driver email recieved'
         })
       } else {
         //the recieeved id is a new email id
-        res.status(200).json({
-          status: 200,
+        res.status(400).json({
+          status: 400,
           message: 'New user',
-          isNewUser: true
+          isNewUser: true,
+          userType: 'user'
         })
       }
     } else {
@@ -43,7 +44,8 @@ router.post('/login', async (req, res, next) => {
         res.status(200).json({
           status: 200,
           message: 'Registered User',
-          isUser: true
+          isUser: true,
+          userType: 'user'
         })
       } else {
         console.log('diff pin entered')

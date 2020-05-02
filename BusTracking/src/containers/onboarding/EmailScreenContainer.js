@@ -11,7 +11,7 @@ export class EmailScreenContainer extends Component {
 
 const mapStateToProps = state => ({
   onboarding: state.onboardingReducer.onboarding,
-  emailVerifiedStatus: state.onboardingReducer.emailVerifiedStatus,
+  userType: state.onboardingReducer.userType,
 })
 
 export default connect(mapStateToProps, {

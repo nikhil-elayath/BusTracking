@@ -1,6 +1,5 @@
 
-\c
-bus_tracking;
+\c bus_tracking;
 
 INSERT INTO  users
 
@@ -48,5 +47,3 @@ INSERT INTO  drivers
 VALUES
 
   ('Utsav', 'Mevada', '29-04-1997', 'utsav.mevada@gmail.com', 123456, 7738933083, 'male', 'Kolbad', 'Thane', 'Maharashtra', 2836, 22 , 101, 5);
-
-  

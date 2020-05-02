@@ -20,7 +20,10 @@ export default class EmailScreen extends Component {
     data.email = this.state.email
     data.pin = this.state.pin
     await this.props.checkEmail(data)
-    this.props.emailVerifiedStatus === 200
+    console.log('from screen', this.props.userType)
+    this.props.userType === 'driver'
+      ? this.props.navigation.navigate('DriverLocation')
+      : this.props.userType === 'user'
       ? this.props.navigation.navigate('UserHomePage')
       : null
   }
