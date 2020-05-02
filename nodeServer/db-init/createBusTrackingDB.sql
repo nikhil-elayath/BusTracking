@@ -3,7 +3,7 @@ create database bus_tracking;
 
 \c bus_tracking;
 
-CREATE TABLE users 
+CREATE TABLE users
 (
     user_id SERIAL,
     f_name VARCHAR(255),
@@ -13,17 +13,17 @@ CREATE TABLE users
     pin INT,
     phone_number VARCHAR(255),
     gender VARCHAR(10),
-     street_name VARCHAR(100),
+    street_name VARCHAR(100),
     city_name VARCHAR(100),
     state_name VARCHAR(100),
     city_id INT,
     state_id INT,
     country_id INT
- 
+
 
 );
 
-CREATE TABLE drivers 
+CREATE TABLE drivers
 (
     driver_id SERIAL,
     f_name VARCHAR(255),
@@ -33,17 +33,26 @@ CREATE TABLE drivers
     pin INT,
     phone_number VARCHAR(255),
     gender VARCHAR(10),
-     street_name VARCHAR(100),
+    street_name VARCHAR(100),
     city_name VARCHAR(100),
     state_name VARCHAR(100),
     city_id INT,
     state_id INT,
     country_id INT,
-   rating INT
+    rating INT
 
 );
+
+-- TO STORE THE LOCATION OF THE DRIVER
+CREATE TABLE driver_location
+(
+    driver_location_id INT,
+    driver_id INT,
+    longitude INT,
+    latitude INT
+);
 -- to store the trip details of the ride
-CREATE TABLE trip_details 
+CREATE TABLE trip_details
 (
     trip_details_id SERIAL,
     trip_date DATE,
@@ -56,7 +65,7 @@ CREATE TABLE trip_details
     deboarded BOOLEAN,
     deboarded_time TIMESTAMP
 
-   
+
 
 );
 
