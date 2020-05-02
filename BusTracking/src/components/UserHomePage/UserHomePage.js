@@ -47,8 +47,8 @@ export default class UserHomePage extends Component {
           style={styles.map}
           initialRegion={{
             //these locations are to be of the drivers which will be fetched from the database
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
