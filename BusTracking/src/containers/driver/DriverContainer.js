@@ -1,12 +1,19 @@
 import React, {Component} from 'react'
-import {Text, View} from 'react-native'
+import DriverLocation from '../../components/driver/DriverLocation'
+import {connect} from 'react-redux'
+import {updateDriverLocation} from '../../actions/Driver'
 
-export default class DriverContainer extends Component {
+export class DriverContainer extends Component {
   render () {
-    return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
-    )
+    console.log('from container', this.props)
+    return <DriverLocation {...this.props} />
   }
 }
+
+const mapStateToProps = state => ({
+  // onboarding: state.onboardingReducer.onboarding,
+  // userType: state.onboardingReducer.userType,
+})
+export default connect(mapStateToProps, {
+  updateDriverLocation,
+})(DriverContainer)

@@ -26,6 +26,13 @@ export default class DriverLocation extends Component {
           latitude: info.coords.latitude,
           longitude: info.coords.longitude,
         })
+        console.log('state', this.state)
+        let data = {
+          email: 'utsav.mevada@gmail.com',
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+        }
+        await this.props.updateDriverLocation(data)
       })
     } else {
       console.log('ACCESS_FINE_LOCATION permission denied')
@@ -38,7 +45,7 @@ export default class DriverLocation extends Component {
           <Text> Driver location </Text>
         </View>
 
-        <Mapview
+        {/* <Mapview
           testID='map'
           showsCompass
           showsTraffic
@@ -53,7 +60,7 @@ export default class DriverLocation extends Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-        />
+        /> */}
       </View>
     )
   }

@@ -48,8 +48,8 @@ CREATE TABLE driver_location
 (
     driver_location_id INT,
     driver_id INT,
-    longitude INT,
-    latitude INT
+    longitude FLOAT,
+    latitude FLOAT
 );
 -- to store the trip details of the ride
 CREATE TABLE trip_details

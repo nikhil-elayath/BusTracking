@@ -1,12 +1,20 @@
 import React, {Component} from 'react'
-import {Text, View} from 'react-native'
+import UserHomePage from '../../components/UserHomePage/UserHomePage'
+import {connect} from 'react-redux'
+import {getDriverLocation} from '../../actions/Driver'
 
-export default class UserHomePageContainer extends Component {
+export class UserHomePageContainer extends Component {
   render () {
-    return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
-    )
+    console.log('from container', this.props)
+    return <UserHomePage {...this.props} />
   }
 }
+
+const mapStateToProps = state => ({
+  driverLocation: state.driverReducer.driverLocation,
+  // onboarding: state.onboardingReducer.onboarding,
+  // userType: state.onboardingReducer.userType,
+})
+export default connect(mapStateToProps, {
+  getDriverLocation,
+})(UserHomePage)

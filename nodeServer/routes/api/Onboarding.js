@@ -33,7 +33,7 @@ router.post('/login', async (req, res, next) => {
           status: 400,
           message: 'New user',
           isNewUser: true,
-          userType: 'user'
+          userType: 'newUser'
         })
       }
     } else {

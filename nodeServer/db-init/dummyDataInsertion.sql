@@ -47,3 +47,12 @@ INSERT INTO  drivers
 VALUES
 
   ('Utsav', 'Mevada', '29-04-1997', 'utsav.mevada@gmail.com', 123456, 7738933083, 'male', 'Kolbad', 'Thane', 'Maharashtra', 2836, 22 , 101, 5);
+
+  INSERT INTO  driver_location
+  (
+     driver_location_id ,
+    driver_id ,
+    longitude ,
+    latitude
+  )
+  VALUES (1,1,-122.4324,37.78825)

@@ -22,21 +22,24 @@ export default class UserHomePage extends Component {
     if (granted) {
       await Geolocation.getCurrentPosition(async info => {
         console.log('info', info)
-        await this.setState({
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
-        })
+        // await this.setState({
+        //   latitude: info.coords.latitude,
+        //   longitude: info.coords.longitude,
+        // })
       })
     } else {
       console.log('ACCESS_FINE_LOCATION permission denied')
     }
+    let data = {email: 'utsav.mevada@gmail.com'}
+    await this.props.getDriverLocation(data)
+    console.log(this.props.driverLocation)
   }
 
   render () {
     return (
       <View style={styles.container}>
         <View>
-          <Text> User location </Text>
+          <Text> This is driver's location coming from db </Text>
         </View>
 
         <Mapview
@@ -49,8 +52,8 @@ export default class UserHomePage extends Component {
           style={styles.map}
           initialRegion={{
             //these locations are to be of the drivers which will be fetched from the database
-            latitude: this.state.latitude,
-            longitude: this.state.longitude,
+            latitude: this.props.driverLocation.latitude,
+            longitude: this.props.driverLocation.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}

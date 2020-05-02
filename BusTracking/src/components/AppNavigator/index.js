@@ -5,8 +5,8 @@ import {createStackNavigator} from '@react-navigation/stack'
 //creating a new stack of navigation
 const Stack = createStackNavigator()
 import Login from '../../containers/onboarding/EmailScreenContainer'
-import UserHomePage from '../../components/UserHomePage/UserHomePage'
-import driver from '../../components/driver/DriverLocation'
+import UserHomePage from '../../containers/UserHomePage/UserHomePageContainer'
+import driver from '../../containers/driver/DriverContainer'
 
 const AppNavigator = props => {
   return (

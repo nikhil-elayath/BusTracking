@@ -8,6 +8,7 @@ const error = require('./middlewares/error')
 
 //importing the Router files
 const onboarding = require('./routes/api/Onboarding')
+const driverLocation = require('./routes/api/DriverLocation')
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -20,6 +21,7 @@ app.use(
 app.use(logger('common'))
 // using the router files
 app.use('/api/onboarding/', onboarding)
+app.use('/api/driver-location/', driverLocation)
 
 const port = process.env.PORT || 5000
 
