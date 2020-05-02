@@ -8,7 +8,10 @@ export const checkEmail = emailId => dispatch => {
   console.log('from check email action', emailId)
   console.log(onboardingUrl + '/login')
   return axios
-    .post(onboardingUrl + '/login', emailId)
+    .post(
+      'https://limitless-spire-86124.herokuapp.com/api/onboarding/login',
+      emailId,
+    )
     .then(res => {
       dispatch({
         type: CHECK_MAIL,

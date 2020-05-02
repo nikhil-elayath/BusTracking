@@ -8,7 +8,6 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case GET_DRIVER_LOCATION:
       //returning the state and putting the data that is recieved from the api in to the emailVerified
-      console.log(action.payload)
       return {...state, driverLocation: action.payload.data}
     default:
       return state

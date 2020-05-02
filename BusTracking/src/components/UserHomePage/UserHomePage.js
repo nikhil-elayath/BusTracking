@@ -14,6 +14,8 @@ export default class UserHomePage extends Component {
     latitude: '',
     longitude: '',
   }
+  // watchID: ?number = null
+
   componentDidMount = async () => {
     //askinf for permission of the users location
     const granted = await PermissionsAndroid.request(
@@ -32,7 +34,11 @@ export default class UserHomePage extends Component {
     }
     let data = {email: 'utsav.mevada@gmail.com'}
     await this.props.getDriverLocation(data)
-    console.log(this.props.driverLocation)
+    // console.log(this.props.driverLocation)
+    //success returns the changed position
+    Geolocation.watchPosition(success => {
+      console.log(success)
+    })
   }
 
   render () {
@@ -42,6 +48,7 @@ export default class UserHomePage extends Component {
           <Text> This is driver's location coming from db </Text>
         </View>
 
+        {/* mapping th coordinates of the driver */}
         <Mapview
           testID='map'
           showsCompass
@@ -57,6 +64,7 @@ export default class UserHomePage extends Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
+          // onRegionChange={}
         />
       </View>
     )

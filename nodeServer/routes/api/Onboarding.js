@@ -1,72 +1,71 @@
 //importing the express framework
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 //importing the database to establish the connection
-const db = require('../../db-init/dbConn')
+const db = require("../../db-init/dbConn");
 
-router.post('/login', async (req, res, next) => {
-  console.log('api called', req.body)
-  let userEnteredEmailId = req.body.email
-  let userEnteredPin = req.body.pin
-  console.log('userEnteredPin', userEnteredPin)
+router.post("/login", async (req, res, next) => {
+  console.log("api called", req.body);
+  let userEnteredEmailId = req.body.email;
+  let userEnteredPin = req.body.pin;
   try {
     const emailFromUserTable = await db.any(
       `select * from users where email_id='${userEnteredEmailId}'`
-    )
+    );
     // console.log('emailFromUserTable', emailFromUserTable)
     //checking if that particular email id exists in the user table if not then will check in the drivers table.
     if (emailFromUserTable.length == 0) {
       const emailFromDriverTable = await db.any(
         `select * from drivers where email_id ='${userEnteredEmailId}'`
-      )
-      console.log('emailFromDriverTable', emailFromDriverTable)
+      );
+      console.log("emailFromDriverTable", emailFromDriverTable);
 
       if (emailFromDriverTable.length != 0) {
         res.status(200).json({
           status: 200,
-          userType: 'driver',
-          message: 'Driver email recieved'
-        })
+          userType: "driver",
+          message: "Driver email recieved",
+        });
       } else {
         //the recieeved id is a new email id
         res.status(400).json({
           status: 400,
-          message: 'New user',
+          message: "New user",
           isNewUser: true,
-          userType: 'newUser'
-        })
+          userType: "newUser",
+        });
       }
     } else {
-      console.log('user pin', emailFromUserTable['0'].pin)
-      console.log(userEnteredPin)
-      if (emailFromUserTable['0'].pin == userEnteredPin) {
-        console.log('same pin entered')
+      console.log("user pin", emailFromUserTable["0"].pin);
+      console.log(userEnteredPin);
+      if (emailFromUserTable["0"].pin == userEnteredPin) {
+        console.log("same pin entered");
         res.status(200).json({
           status: 200,
-          message: 'Registered User',
+          message: "Registered User",
           isUser: true,
-          userType: 'user'
-        })
+          userType: "user",
+        });
       } else {
-        console.log('diff pin entered')
+        console.log("diff pin entered");
 
         res.status(400).json({
           status: 400,
-          message: 'invalid Credentials'
+          message: "invalid Credentials",
           // isUser: true
-        })
+        });
       }
       //the email id belongs to a user
     }
   } catch (err) {
     err = {
-      statusCode: 400
-    }
+      statusCode: 400,
+    };
 
     //next is used to handle the error gracefully by express. Whatever is passed to the next it considers
     // as an error and is passed to the middleware function
-    next(err)
+    next(err);
   }
-})
+});
 
-module.exports = router
+module.exports = router;
