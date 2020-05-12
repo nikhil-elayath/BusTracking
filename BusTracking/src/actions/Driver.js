@@ -2,13 +2,12 @@ import axios from 'axios';
 import {url} from '../config';
 
 const cardUrl = url + '/driver-location/';
-import {GET_DRIVER_LOCATION} from './Types';
+import {GET_DRIVER_LOCATION, UPDATE_DRIVER_LOCATION} from './Types';
 
 export const updateDriverLocation = data => dispatch => {
   console.log('from updateDriverLocation action', data);
-  console.log(cardUrl + '/update-driver-location');
   return axios
-    .post(driverLocation + '/update-driver-location', data)
+    .post(cardUrl + '/update-driver-location', data)
     .then(res => {
       dispatch({
         type: UPDATE_DRIVER_LOCATION,
