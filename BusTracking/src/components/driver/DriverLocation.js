@@ -38,6 +38,17 @@ export default class DriverLocation extends Component {
       this.watchID = Geolocation.watchPosition(position => {
         var lastPosition = JSON.stringify(position);
         console.log('LAST ', lastPosition);
+        await this.setState({
+          latitude: lastPosition.coords.latitude,
+          longitude: lastPosition.longitude,
+        });
+        let data = {
+          email: 'utsav.mevada@gmail.com',
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+        };
+        await this.props.updateDriverLocation(data);
+
         // this.setState({lastPosition});
       });
     } else {
