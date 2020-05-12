@@ -1,47 +1,47 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {
   Text,
   View,
   Dimensions,
   PermissionsAndroid,
   StyleSheet,
-} from 'react-native'
-import Mapview, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps'
-import Geolocation from '@react-native-community/geolocation'
+} from 'react-native';
+import Mapview, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 
 export default class UserHomePage extends Component {
   state = {
     latitude: '',
     longitude: '',
-  }
+  };
   // watchID: ?number = null
 
   componentDidMount = async () => {
     //askinf for permission of the users location
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    )
+    );
     if (granted) {
       await Geolocation.getCurrentPosition(async info => {
-        console.log('info', info)
+        console.log('info', info);
         // await this.setState({
         //   latitude: info.coords.latitude,
         //   longitude: info.coords.longitude,
         // })
-      })
+      });
     } else {
-      console.log('ACCESS_FINE_LOCATION permission denied')
+      console.log('ACCESS_FINE_LOCATION permission denied');
     }
-    let data = {email: 'utsav.mevada@gmail.com'}
-    await this.props.getDriverLocation(data)
+    let data = {email: 'utsav.mevada@gmail.com'};
+    await this.props.getDriverLocation(data);
     // console.log(this.props.driverLocation)
     //success returns the changed position
     Geolocation.watchPosition(success => {
-      console.log(success)
-    })
-  }
+      console.log(success);
+    });
+  };
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <View>
@@ -49,25 +49,33 @@ export default class UserHomePage extends Component {
         </View>
 
         {/* mapping th coordinates of the driver */}
-        <Mapview
-          testID='map'
+        <Mapview.Animated
+          ref="map"
+          testID="map"
           showsCompass
           showsTraffic
           showsUserLocation
           showsMyLocationButton
           provider={PROVIDER_GOOGLE} // remove if not using Google Maps
           style={styles.map}
+          zoomEnabled={true}
+          showsMyLocationButton={true}
+          // animateToCoordinate={{coordinate:}}
           initialRegion={{
             //these locations are to be of the drivers which will be fetched from the database
-            latitude: this.props.driverLocation.latitude,
-            longitude: this.props.driverLocation.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitude: this.props.driverLocation.latitude
+              ? this.props.driverLocation.latitude
+              : 15,
+            longitude: this.props.driverLocation.longitude
+              ? this.props.driverLocation.longitude
+              : 15,
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.002,
           }}
           // onRegionChange={}
         />
       </View>
-    )
+    );
   }
 }
 
@@ -92,4 +100,4 @@ const styles = StyleSheet.create({
   map: {
     height: Dimensions.get('window').height * 0.45,
   },
-})
+});
