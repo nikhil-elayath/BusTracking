@@ -21,12 +21,12 @@ export default class DriverLocation extends Component {
     );
     if (granted) {
       await Geolocation.getCurrentPosition(async info => {
-        console.log('info', info);
+        // console.log('info', info);
         await this.setState({
           latitude: info.coords.latitude,
           longitude: info.coords.longitude,
         });
-        console.log('state', this.state);
+        // console.log('state', this.state);
         let data = {
           email: 'utsav.mevada@gmail.com',
           latitude: this.state.latitude,
@@ -35,12 +35,16 @@ export default class DriverLocation extends Component {
 
         await this.props.updateDriverLocation(data);
       });
-      this.watchID = Geolocation.watchPosition(position => {
-        var lastPosition = JSON.stringify(position);
-        console.log('LAST ', lastPosition);
+
+      //writing the updated location to db everytine location changes
+
+      this.watchID = Geolocation.watchPosition(async position => {
+        // var lastPosition = JSON.stringify(position);
+        console.log('LAST ', typeof position);
+        console.log('LAST ', position.coords.latitude);
         await this.setState({
-          latitude: lastPosition.coords.latitude,
-          longitude: lastPosition.longitude,
+          latitude: position.coords.latitude,
+          longitude: position.coords.latitude,
         });
         let data = {
           email: 'utsav.mevada@gmail.com',

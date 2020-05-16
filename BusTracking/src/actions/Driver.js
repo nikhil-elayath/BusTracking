@@ -19,7 +19,7 @@ export const updateDriverLocation = data => dispatch => {
     });
 };
 export const getDriverLocation = data => dispatch => {
-  console.log('from getdriver action', data);
+  // console.log('from getdriver action', data);
   return axios
     .post(cardUrl + 'get-driver-location', data)
     .then(res => {

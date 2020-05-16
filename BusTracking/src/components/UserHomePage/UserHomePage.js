@@ -17,28 +17,37 @@ export default class UserHomePage extends Component {
   // watchID: ?number = null
 
   componentDidMount = async () => {
+    this.foo();
     //askinf for permission of the users location
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    );
-    if (granted) {
-      await Geolocation.getCurrentPosition(async info => {
-        console.log('info', info);
-        // await this.setState({
-        //   latitude: info.coords.latitude,
-        //   longitude: info.coords.longitude,
-        // })
-      });
-    } else {
-      console.log('ACCESS_FINE_LOCATION permission denied');
-    }
+    // const granted = await PermissionsAndroid.request(
+    //   PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    // );
+    // if (granted) {
+    //   await Geolocation.getCurrentPosition(async info => {
+    //     console.log('info', info);
+    //     // await this.setState({
+    //     //   latitude: info.coords.latitude,
+    //     //   longitude: info.coords.longitude,
+    //     // })
+    //   });
+    // } else {
+    //   console.log('ACCESS_FINE_LOCATION permission denied');
+    // }
     let data = {email: 'utsav.mevada@gmail.com'};
     await this.props.getDriverLocation(data);
-    // console.log(this.props.driverLocation)
+    console.log(this.props.driverLocation);
     //success returns the changed position
-    Geolocation.watchPosition(success => {
-      console.log(success);
-    });
+    // Geolocation.watchPosition(success => {
+    //   console.log(success);
+    // });
+  };
+  foo = async () => {
+    console.log('fpoo');
+    let data = {email: 'utsav.mevada@gmail.com'};
+    await this.props.getDriverLocation(data);
+    // your function code here
+
+    setTimeout(this.foo, 5000);
   };
 
   render() {
@@ -65,10 +74,10 @@ export default class UserHomePage extends Component {
             //these locations are to be of the drivers which will be fetched from the database
             latitude: this.props.driverLocation.latitude
               ? this.props.driverLocation.latitude
-              : 15,
+              : 0,
             longitude: this.props.driverLocation.longitude
               ? this.props.driverLocation.longitude
-              : 15,
+              : 0,
             latitudeDelta: 0.001,
             longitudeDelta: 0.002,
           }}
