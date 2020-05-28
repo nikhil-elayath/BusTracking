@@ -1,68 +1,90 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {
   Text,
   View,
   Dimensions,
   PermissionsAndroid,
   StyleSheet,
-} from 'react-native';
-import Mapview, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
+} from 'react-native'
+import Mapview, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps'
+import Geolocation from '@react-native-community/geolocation'
 
 export default class DriverLocation extends Component {
   state = {
     latitude: '',
     longitude: '',
-  };
+  }
   componentDidMount = async () => {
     //askinf for permission of the users location
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    );
+    )
     if (granted) {
       await Geolocation.getCurrentPosition(async info => {
         // console.log('info', info);
         await this.setState({
           latitude: info.coords.latitude,
           longitude: info.coords.longitude,
-        });
+        })
         // console.log('state', this.state);
         let data = {
           email: 'utsav.mevada@gmail.com',
           latitude: this.state.latitude,
           longitude: this.state.longitude,
-        };
+        }
 
-        await this.props.updateDriverLocation(data);
-      });
+        await this.props.updateDriverLocation(data)
+      })
 
       //writing the updated location to db everytine location changes
 
       this.watchID = Geolocation.watchPosition(async position => {
         // var lastPosition = JSON.stringify(position);
-        console.log('LAST ', typeof position);
-        console.log('LAST ', position.coords.latitude);
+        console.log('LAST ', typeof position)
+        console.log('LAST ', position.coords.latitude)
         await this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.latitude,
-        });
+        })
         let data = {
           email: 'utsav.mevada@gmail.com',
           latitude: this.state.latitude,
           longitude: this.state.longitude,
-        };
-        await this.props.updateDriverLocation(data);
+        }
+        await this.props.updateDriverLocation(data)
 
         // this.setState({lastPosition});
-      });
+      })
     } else {
-      console.log('ACCESS_FINE_LOCATION permission denied');
+      console.log('ACCESS_FINE_LOCATION permission denied')
     }
-  };
+    this.foo()
+  }
   componentWillUnmount = () => {
-    navigator.geolocation.clearWatch(this.watchID);
-  };
-  render() {
+    Geolocation.clearWatch(this.watchID)
+  }
+  foo = async () => {
+    console.log('wiriting new driver location')
+    await Geolocation.getCurrentPosition(async info => {
+      // console.log('info', info);
+      await this.setState({
+        latitude: info.coords.latitude,
+        longitude: info.coords.longitude,
+      })
+      console.log('new location', this.state)
+      let data = {
+        email: 'utsav.mevada@gmail.com',
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+      }
+
+      await this.props.updateDriverLocation(data)
+    })
+    // your function code here
+
+    setTimeout(this.foo, 5000)
+  }
+  render () {
     return (
       <View style={styles.container}>
         <View>
@@ -86,7 +108,7 @@ export default class DriverLocation extends Component {
           }}
         /> */}
       </View>
-    );
+    )
   }
 }
 const styles = StyleSheet.create({
@@ -102,4 +124,4 @@ const styles = StyleSheet.create({
   map: {
     height: Dimensions.get('window').height * 0.45,
   },
-});
+})
